@@ -1,0 +1,8 @@
+# Video Editor Pro - Dependencies
+
+# GUI
+Pillow>=10.0.0
+
+# Optional: For development/testing
+# pytest>=7.0.0
+# pytest-cov>=4.0.0
