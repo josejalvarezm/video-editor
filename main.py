@@ -2192,14 +2192,28 @@ def main():
     try:
         root = tk.Tk()
         
+        # Create and show splash screen
+        from src.ui.splash import SplashScreen
+        splash = SplashScreen(root, duration=2.5)
+        
+        # Initialize app with splash updates
+        splash.set_status("Initializing services...")
+        
         # Try to use SOLID dependency injection via factory
         try:
             from src.app_factory import get_factory
+            splash.set_status("Loading video services...")
             factory = get_factory()
+            
+            splash.set_status("Loading image services...")
             app = factory.create_app(root)
         except ImportError:
             # Fallback to legacy initialization if src module not available
+            splash.set_status("Creating application...")
             app = VideoUpscalerApp(root)
+        
+        splash.set_status("Ready!")
+        splash.close()
         
         root.mainloop()
     except Exception as e:
